@@ -1,4 +1,3 @@
-
 // connect
 
 // build api for front end
@@ -23,33 +22,34 @@ const mongoose = require('mongoose');
 app.use(cors());
 
 app.use(cors({
-  origin: true,
-  credentials: true,
+    origin: true,
+    credentials: true,
 }));
 
 const MONGODB_URI = "mongodb://127.0.0.1:27017/email?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.4";
 
 async function main() {
-  console.log(MONGODB_URI)
-  await mongoose.connect(MONGODB_URI);
+    console.log(MONGODB_URI)
+    await mongoose.connect(MONGODB_URI);
 }
+
 main().catch((err) => console.log(err));
 // parse json data
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 
 // POST method route
-app.post('/put', (req, res) => {
-
-  res.send('POST request to the homepage')
+app.get('/put/:id', (req, res) => {
+    console.log(req.params.id);
+    res.send(req.params.id);
 });
 
 // POST method route
 app.post('/pull', (req, res) => {
-  res.send('POST request to the homepage')
+    res.send('POST request to the homepage')
 })
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+    console.log(`Listening on port ${PORT}`);
 });
 // send value back to front from llm
