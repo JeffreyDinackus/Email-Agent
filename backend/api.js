@@ -39,6 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // POST method route
+
 app.get('/put/:id', (req, res) => {
     console.log(req.params.id);
     res.send(req.params.id);
@@ -47,7 +48,19 @@ app.get('/put/:id', (req, res) => {
 // POST method route
 app.post('/pull', (req, res) => {
     res.send('POST request to the homepage')
+
 })
+
+// POST endpoint to handle data
+app.post('/put', (req, res) => {
+  const data = req.body.data;
+  console.log('Received data from client:', data);
+  // You can process the data here (save to database, etc.)
+  res.json({ message: 'Data received successfully' });
+});
+
+
+
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
