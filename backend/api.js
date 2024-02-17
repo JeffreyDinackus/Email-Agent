@@ -26,15 +26,14 @@ app.use(cors({
   origin: true,
   credentials: true,
 }));
-main().catch((err) => console.log(err));
 
-const MONGODB_URI = process.env.MONGODB_URI;
-console.log(MONGODB_URI)
-
+const MONGODB_URI = process.env.MONGO_URI;
 
 async function main() {
+  console.log(MONGODB_URI)
   await mongoose.connect(MONGODB_URI);
 }
+main().catch((err) => console.log(err));
 // parse json data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
