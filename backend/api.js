@@ -26,18 +26,44 @@ app.use(cors({
   origin: true,
   credentials: true,
 }));
-main().catch((err) => console.log(err));
 
-const MONGODB_URI = process.env.MONGODB_URI;
-console.log(MONGODB_URI)
-
+const MONGODB_URI = 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1';
 
 async function main() {
+  console.log(MONGODB_URI)
   await mongoose.connect(MONGODB_URI);
 }
+main().catch((err) => console.log(err));
 // parse json data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// POST method route
+app.post('/put', (req, res) => {
+  res.send('POST request to the homepage')
+});
+
+// POST method route
+app.post('/pull', (req, res) => {
+
+  // read message
+
+  // save to db 
+
+
+  res.send('POST request to the homepage')
+})
+
+// POST endpoint to handle data
+app.post('/put', (req, res) => {
+  const data = req.body.data;
+  console.log('Received data from client:', data);
+  // You can process the data here (save to database, etc.)
+  res.json({ message: 'Data received successfully' });
+});
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
