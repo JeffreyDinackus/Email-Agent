@@ -28,8 +28,12 @@ app.use(cors({
 }));
 main().catch((err) => console.log(err));
 
+const MONGODB_URI = process.env.MONGODB_URI;
+console.log(MONGODB_URI)
+
+
 async function main() {
-  await mongoose.connect(process.env.MONGO_URI);
+  await mongoose.connect(MONGODB_URI);
 }
 // parse json data
 app.use(express.json());
