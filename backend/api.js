@@ -38,6 +38,16 @@ main().catch((err) => console.log(err));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// POST method route
+app.post('/put', (req, res) => {
+  res.send('POST request to the homepage')
+});
+
+// POST method route
+app.post('/pull', (req, res) => {
+  res.send('POST request to the homepage')
+})
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
