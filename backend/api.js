@@ -27,7 +27,7 @@ app.use(cors({
   credentials: true,
 }));
 
-const MONGODB_URI = process.env.MONGO_URI;
+const MONGODB_URI = 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1';
 
 async function main() {
   console.log(MONGODB_URI)
@@ -37,6 +37,16 @@ main().catch((err) => console.log(err));
 // parse json data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// POST method route
+app.post('/put', (req, res) => {
+  res.send('POST request to the homepage')
+});
+
+// POST method route
+app.post('/pull', (req, res) => {
+  res.send('POST request to the homepage')
+})
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
