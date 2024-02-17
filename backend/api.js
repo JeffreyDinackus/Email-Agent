@@ -13,8 +13,7 @@
 
 // send value back to front from llm
 
-const config = require('./config');
-const MONGODB_URI = config.MONGODB_URI;
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -29,7 +28,7 @@ app.use(cors({
 }));
 main().catch((err) => console.log(err));
 
-
+const MONGODB_URI = process.env.MONGODB_URI;
 console.log(MONGODB_URI)
 
 
