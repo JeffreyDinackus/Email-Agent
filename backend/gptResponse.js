@@ -1,11 +1,6 @@
 const OpenAI = require('openai');
-<<<<<<< Updated upstream
-const apiKey = process.env.OPENAI;
-=======
 require('dotenv').config()
-const apiKey = process.env.OPENAI
->>>>>>> Stashed changes
-
+const apiKey = process.env.OPENAI;
 const key = new OpenAI({
     apiKey: apiKey
 })
