@@ -1,8 +1,8 @@
-import OpenAI from 'openai';
-const apiKey = "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"
+const OpenAI = require('openai');
+const apiKey = "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"
 
 const key = new OpenAI({
-  apiKey: apiKey
+    apiKey: apiKey
 })
 
 const openai = new OpenAI(key);
@@ -11,15 +11,15 @@ async function gptResponse(prompt) {
     let res = ""
     const stream = await openai.chat.completions.create({
         model: "gpt-4",
-        messages: [{ role: "user", content: prompt }],
+        messages: [{role: "user", content: prompt}],
         stream: true,
-        temperature: 0.7,
+        temperature: 1,
     });
     for await (const chunk of stream) {
         res += (chunk.choices[0]?.delta?.content || "");
     }
-    process.stdout.write(res)
+    return res;
 }
 
-export default gptResponse
+module.exports = gptResponse
 
