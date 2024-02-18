@@ -28,7 +28,7 @@ app.use(cors({
     credentials: true,
 }));
 
-const MONGODB_URI = "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1";
+const MONGODB_URI = "mongodb://127.0.0.1:27017/email?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1";
 
 async function main() {
     console.log(MONGODB_URI)
