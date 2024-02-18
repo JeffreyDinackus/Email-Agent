@@ -1,5 +1,5 @@
 const OpenAI = require('openai');
-const apiKey = "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"
+const apiKey = process.env.OPENAI;
 
 const key = new OpenAI({
     apiKey: apiKey
@@ -11,7 +11,7 @@ async function gptResponse(prompt) {
     let res = ""
     const stream = await openai.chat.completions.create({
         model: "gpt-4",
-        messages: [{role: "user", content: prompt}],
+        messages: [{ role: "user", content: prompt }],
         stream: true,
         temperature: 1,
     });
