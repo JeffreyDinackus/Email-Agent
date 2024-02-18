@@ -72,19 +72,37 @@ app.post('/put', async (req, res) => {
     try {
         const data = req.body.textContents;
         console.log(data);
-        const aiResponse = await gptResponse(`take the first 3 messages and separate them by \n: ${data}`);
-        console.log('ai response ',aiResponse);
-        const parseModel = new ParseModel({emailContent: aiResponse});
-        // await parseModel.save();
-        // console.log(aiResponse);
-        // console.log('Received data from client:', data);
-        // You can process the data here (save to database, etc.)
+        const firstFiveMessages = getFirstFiveMessages(data);
+        const allResponses = [];
+        for (const msg of firstFiveMessages){
+            const aiResponse = await gptResponse(`summarize this ${msg}`);
+            console.log('ai response ', aiResponse);
+            allResponses.push({emailContent: aiResponse});
+        }
+
+        await ParseModel.insertMany(allResponses);
         res.json({message: 'Data received successfully'});
     } catch (e) {
-
+        console.log(e);
     }
 
 });
+
+function getFirstFiveMessages(messages) {
+    const firstFiveMessages = [];
+    let counter = 0;
+    for (let i = 0; i<messages.length;i++){
+        const cur = messages[i];
+        if (cur!=="tab" && cur.length > 0){
+            firstFiveMessages.push(cur);
+            counter++;
+        }
+        if (counter === 5){
+            break;
+        }
+    }
+    return firstFiveMessages;
+}
 
 
 app.listen(PORT, () => {
