@@ -1,12 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "My Chrome Extension",
+  "name": "Email Bot",
   "version": "1.0",
-  "description": "Description of your extension",
   "permissions": [
-    "activeTab",
-    "storage",
-    "https://mail.google.com/*"
+    "activeTab"
   ],
   "content_scripts": [
     {
@@ -16,10 +13,20 @@
       "js": [
         "content.js"
       ],
-      "run_at": "document_idle"
+      "run_at": "document_end"
     }
   ],
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
   }
 }

@@ -26,7 +26,7 @@ app.use(cors({
     credentials: true,
 }));
 
-const MONGODB_URI = "mongodb://127.0.0.1:27017/email?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.4";
+const MONGODB_URI = "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1";
 
 async function main() {
     console.log(MONGODB_URI)
@@ -36,7 +36,7 @@ async function main() {
 main().catch((err) => console.log(err));
 // parse json data
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 // POST method route
 
@@ -53,10 +53,16 @@ app.post('/pull', (req, res) => {
 
 // POST endpoint to handle data
 app.post('/put', (req, res) => {
-  const data = req.body.data;
-  console.log('Received data from client:', data);
-  // You can process the data here (save to database, etc.)
-  res.json({ message: 'Data received successfully' });
+    const data = req.body.textContents;
+    console.log('Received data from client:', data);
+    // You can process the data here (save to database, etc.)
+    res.json({ message: 'Data received successfully' });
+
+
+
+
+
+
 });
 
 
