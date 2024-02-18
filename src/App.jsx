@@ -1,32 +1,31 @@
-import './App.css';
+import React from 'react';
 import Navbar from './Navbar';
-import Footer from './Footer';
 import Content from './Content';
+import Footer from './Footer';
 import 'bulma/css/bulma.min.css';
-import { useState } from "react";
+
 
 function App() {
-
-  // 1. Send a message to the service worker requesting the user's data
-  function x() {
-    chrome.runtime.sendMessage('get-user-data', (response) => {
-      // 3. Got an asynchronous response with the data from the service worker
-      console.log('received user data', response);
-    })
-  }
+  const handleButtonClick = () => {
+    const storedData = localStorage.getItem('gmail_tr_elements');
+    if (storedData) {
+      const trArray = JSON.parse(storedData);
+      console.log(trArray);
+    } else {
+      console.log('No data stored in localStorage');
+    }
+  };
 
   return (
-    <>
-      {/* <div style={{ backgroundColor: 'black' }}> */}
+    <div>
       <Navbar />
 
-      <button onClick={x}>Get HTML from Tab</button>
+      <button onClick={handleButtonClick}>Retrieve and Log Data</button>
 
       <Content />
       <Footer />
-      {/* </div> */}
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

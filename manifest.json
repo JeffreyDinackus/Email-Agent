@@ -4,15 +4,22 @@
   "version": "1.0",
   "description": "Description of your extension",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage",
+    "https://mail.google.com/*"
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
   "action": {
     "default_popup": "index.html"
-  },
-  "host_permissions": [
-    "<all_urls>"
-  ]
+  }
 }
